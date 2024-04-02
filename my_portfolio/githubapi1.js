@@ -18,11 +18,39 @@ axios.get(url, {}).then(function (datas)
                 datas.data[i].description,
                 datas.data[i].language_url,
             ]);
-        }           console.log("reponames:", reponames[i]);
+                  console.log("reponames[i]:", i,reponames[i]);
+        }           
 
      }  
-          
+     setTimeout(dateFormatter,100);
+
 });
+
+function dateFormatter()
+{
+    for ( i = 0; i < reponames.length; i++)
+    {
+                  console.log("reponames.length",reponames.length);
+                  console.log("in dateFormatter fn , reponames[i]",reponames[i]);
+                  console.log("in dateFormatter fn before, reponames[i][0]",i,reponames[i][0]);
+
+        reponames[i][0] = new Date(reponames[i][0]);
+
+                   console.log("in dateFormatter fn after, reponames[i][0]",i,reponames[i][0]);
+    }
+        reponames.sort(function (a, b)
+        {
+                   console.log("in dateFormatter b[0]", b[0]);
+                   console.log("in dateFormatter a[0]", a[0]);
+                   
+         return b[0] - a[0];
+    
+         
+        });
+        console.log("after sorting in dateformatter reponames", reponames);
+        
+    
+}
 
 
 
