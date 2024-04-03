@@ -2,6 +2,7 @@ const axios = window.axios;
 console.log("the github data you are now seeing is loaded at instant you visit my website . ");
 var reponames = [];
 var languages = [];
+var divId = 1;
 
 const url = "https://api.github.com/users/antonyjohn1997/repos";
 axios.get(url, {}).then(function (datas)
@@ -97,6 +98,37 @@ function add_elements()
 reponames[i][0] = reponames[i][0].replace(" ", ", ");
          console.log("in add_element fn after space replace,reponames[i][1]",i,reponames[i][1]);  
 
+         newElem = document.createElement("div");
+         newElem.setAttribute("id",divId);
+         newElem.setAttribute("class", "card col-8 card-style");
+        
+         innerElem = document.createElement("div");
+         innerElem.setAttribute("id",divId + "in");
+         innerElem.setAttribute("class","card-body");
+         innerElem.innerHTML = "<div>" + 
+         '<h5 class="card-title text-center"> Repo Name : ' +
+         reponames[i][1] +
+         "</h5>" +
+                // console.log("in fn add_element & and dispalying git repo ,reponames[i][1]",reponames[i][1]); +
+         '<hr class="red"/>' +
+         "<p><b> Description : </b>" +
+         reponames[i][3] +
+         "</p>" +
+                 //console.log("in fn add_element & and dispalying git description ,reponames[i][1]",reponames[i][1]); +
+         "<p><b> Languages : </b>" +
+         reponames[i][2] +
+         "</p>" +
+                 //console.log("in fn add_element & and dispalying git repo languges ,reponames[i][1]",reponames[i][1]); +
+          "<p><b> Last Updated : </b>" +
+          reponames[i][0] +
+                //console.log("in fn add_element & and dispalying git repo updated ,reponames[i][1]",reponames[i][1]); +
+
+          "</p>" +  
+         "</div>" +     
+         "</div>";  
+newElem.appendChild(innerElem);
+document.getElementById("repos").appendChild(newElem);
+divId +=1;
 
 //console.log("after executing add_element fn the reponames array",reponames)
    }
