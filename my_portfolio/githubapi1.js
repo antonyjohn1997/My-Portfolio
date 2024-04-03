@@ -1,7 +1,9 @@
 const axios = window.axios;
 console.log("the github data you are now seeing is loaded at instant you visit my website . ");
 var reponames = [];
-const url = "https://api.github.com/users/antonyjohn/repos";
+var languages = [];
+
+const url = "https://api.github.com/users/antonyjohn1997/repos";
 axios.get(url, {}).then(function (datas)
 {
             console.log("datas.data",datas.data);
@@ -16,7 +18,7 @@ axios.get(url, {}).then(function (datas)
                 datas.data[i].name,
                 datas.data[i].language,
                 datas.data[i].description,
-                datas.data[i].language_url,
+                datas.data[i].languages_url,
             ]);
                   console.log("reponames[i]:", i,reponames[i]);
         }           
@@ -30,7 +32,7 @@ function dateFormatter()
 {
     for ( i = 0; i < reponames.length; i++)
     {
-                  console.log("reponames.length",reponames.length);
+                  console.log("reponames.length",reponames.length); //
                   console.log("in dateFormatter fn , reponames[i]",reponames[i]);
                   console.log("in dateFormatter fn before, reponames[i][0]",i,reponames[i][0]);
 
@@ -48,10 +50,29 @@ function dateFormatter()
          
         });
         console.log("after sorting in dateformatter reponames", reponames);
-        
+        getLanguages();
     
 }
 
+ function getLanguages()
+{
+    for (i = 0; i < 4; i++)
+    {
+                   console.log("before pushing in getlanguages function, reponames[i][4]", reponames[i][4]); 
+
+        axios.get(reponames[i][4], {}).then(function (datas)
+        {
+                   console.log("datas.data in getlanguages fn for language array:", datas.data);
+                  
+            languages.push(Object.entries(datas.data));
+                   
+            
+                    
+        });
+                   // console.log("datas.data in getlanguages fn for language array:",datas.data);
+                    console.log("in getLanguages fn , after pushing languages array",languages);
+    }
+}
 
 
 
