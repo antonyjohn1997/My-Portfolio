@@ -25,7 +25,7 @@ axios.get(url, {}).then(function (datas)
 
      }  
      setTimeout(dateFormatter,100);
-
+     setTimeout(add_elements,2000);
 });
 
 function dateFormatter()
@@ -74,6 +74,34 @@ function dateFormatter()
     }
 }
 
+function add_elements()
+{
+   for(var i = 0; i < 4; i++)
+   {
+          console.log("before executing add_element reponames[i][0]",reponames[i][0]);  
+          console.log("before executing add_element reponames[i][0]",reponames[i][1]);  
+   
+          console.log("in add_element fn before slice, reponames[i][0]",i,reponames[i][0]);  
 
+    reponames[i][0] = reponames[i][0].toString().slice(0, 16);//taking only date and avoiding time 
+         console.log("in add_element fn after slice, reponames[i][0]",i,reponames[i][0]); 
+         console.log("in add_element fn before - replacement,reponames[i][1]",i,reponames[i][1]);  
+    reponames[i][1] = reponames[i][1].replace(/-/g, " ");
+         console.log("in add_element fn after - replace,reponames[i][1]",i,reponames[i][1]);  
+         console.log("in add_element fn before _ replace,reponames[i][1]",i,reponames[i][1]);  
+
+    reponames[i][0] = reponames[i][0].replace(/_/g, " ");
+         console.log("in add_element fn after _ replace,reponames[i][1]",i,reponames[i][1]);  
+         console.log("in add_element fn before space replace,reponames[i][1]",i,reponames[i][1]);  
+
+reponames[i][0] = reponames[i][0].replace(" ", ", ");
+         console.log("in add_element fn after space replace,reponames[i][1]",i,reponames[i][1]);  
+
+
+//console.log("after executing add_element fn the reponames array",reponames)
+   }
+   console.log("after executing add_element fn the reponames array",reponames)//arranged the first 4 repository .
+
+}
 
 
