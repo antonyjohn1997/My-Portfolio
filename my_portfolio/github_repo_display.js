@@ -4,6 +4,7 @@ var reponames = [];
 var languages = [];
 var divId = 1;
 
+
 const url = "https://api.github.com/users/antonyjohn1997/repos";
 axios.get(url, {}).then(function (datas)
 {
@@ -124,7 +125,12 @@ reponames[i][0] = reponames[i][0].replace(" ", ", ");
                 //console.log("in fn add_element & and dispalying git repo updated ,reponames[i][1]",reponames[i][1]); +
 
           "</p>" +  
-         "</div>" +     
+         "</div>" +   
+         '<div style="height:inherit;width:auto">' +
+      '<div id="chart' +
+      divId +
+      '" >' + 
+      "</div>" +
          "</div>";  
 newElem.appendChild(innerElem);
 document.getElementById("repos").appendChild(newElem);
@@ -133,7 +139,39 @@ divId +=1;
 //console.log("after executing add_element fn the reponames array",reponames)
    }
    console.log("after executing add_element fn the reponames array",reponames)//arranged the first 4 repository .
+for(i = 0; i < 4; i++)
+{
+    drawPieChart(languages[i],i + 1, i);
 
+}
+
+}
+
+function drawPieChart(langarray, id , i)
+{
+    id = "chart" + id;
+    console.log("in drawPieChart fn id :",langarray);
+    google.charts.load("current", { packages: ["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    langarray.unshift(["Language", "lines"]);
+
+    function drawChart()
+    {
+            //console.log("in drawchart fn langarray :",langarray);
+        let data = google.visualization.arrayToDataTable(langarray);
+             //console.log("in drawchart fn langarray :",langarray);
+             //console.log("in drawchart fn value of data :",data);
+
+             let options = {
+                title: "Language Split",
+                pieHole: 0.4,
+                height: 50 + "%",
+                width: 75 + "%",
+              };
+              var chart = new google.visualization.PieChart(document.getElementById(id));
+              console.log("in drawchart fn value of chart :",chart);
+              chart.draw(data, options);      
+    }
 }
 
 
